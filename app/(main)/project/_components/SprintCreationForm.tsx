@@ -25,14 +25,14 @@ import { toast } from "sonner";
 
 export default function SprintCreationForm({
   projectTitle,
-  // projectKey,
+  projectKey,
   projectId,
-  // sprintKey,
+  sprintKey,
 }: any) {
   const [showForm, setShowForm] = useState(false);
   const [dateRange, setDateRange] = useState({
-    from: new Date(),
-    to: addDays(new Date(), 14),
+    from: new Date() || undefined,
+    to: addDays(new Date(), 14) || undefined,
   });
   const router = useRouter();
 
@@ -47,14 +47,10 @@ export default function SprintCreationForm({
   } = useForm({
     resolver: zodResolver(sprintSchema),
     defaultValues: {
-      name: "",
-      startDate: undefined,
-      endDate: undefined,
-      dateRange: {
-        from: undefined,
-        to: undefined
-      }
-    }
+      name: `${projectKey}-${sprintKey}`,
+      startDate: dateRange.from,
+      endDate: dateRange.to,
+    },
   });
 
   const onSubmit = async (data: any) => {
