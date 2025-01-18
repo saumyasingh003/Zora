@@ -47,10 +47,14 @@ export default function SprintCreationForm({
   } = useForm({
     resolver: zodResolver(sprintSchema),
     defaultValues: {
-      name: `${projectKey}-${sprintKey}`,
-      startDate: dateRange.from,
-      endDate: dateRange.to,
-    },
+      name: "",
+      startDate: undefined,
+      endDate: undefined,
+      dateRange: {
+        from: undefined,
+        to: undefined
+      }
+    }
   });
 
   const onSubmit = async (data: any) => {
