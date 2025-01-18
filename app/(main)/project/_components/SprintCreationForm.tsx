@@ -109,54 +109,52 @@ export default function SprintCreationForm({
                   Sprint Duration
                 </label>
                 <Controller
-                  control={control}
-                  name="dateRange"
-                  render={({ field }) => (
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button
-                          variant="outline"
-                          className={`w-full justify-start text-left font-normal bg-gray-300 ${
-                            !dateRange && "text-muted-foreground"
-                          }`}
-                        >
-                          <CalendarIcon className="mr-2 h-4 w-4" />
-                          {dateRange.from && dateRange.to ? (
-                            format(dateRange.from, "LLL dd, y") +
-                            " - " +
-                            format(dateRange.to, "LLL dd, y")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent
-                        className="w-full bg-gray-300 p-5"
-                        align="start"
-                      >
-                        <DayPicker
-                          classNames={{
-                            chevron: "fill-gray-500",
-                            range_start: "bg-gray-700",
-                            range_end: "bg-gray-700",
-                            range_middle: "bg-gray-400",
-                            day_button: "border-none",
-                            today: "border-2 border-gray-700",
-                          }}
-                          mode="range"
-                          disabled={[{ before: new Date() }]}
-                          selected={dateRange}
-                          onSelect={(range: any) => {
-                            if (range?.from && range?.to) {
-                              setDateRange(range);
-                              field.onChange(range);
-                            }
-                          }}
-                        />
-                      </PopoverContent>
-                    </Popover>
-                  )}
-                />
+  control={control}
+  name="startDate"
+  render={({ field }) => (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          className={`w-full justify-start text-left font-normal bg-gray-300 ${
+            !dateRange.from && "text-muted-foreground"
+          }`}
+        >
+          <CalendarIcon className="mr-2 h-4 w-4" />
+          {dateRange.from && dateRange.to ? (
+            format(dateRange.from, "LLL dd, y") +
+            " - " +
+            format(dateRange.to, "LLL dd, y")
+          ) : (
+            <span>Pick a date</span>
+          )}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-full bg-gray-300 p-5" align="start">
+        <DayPicker
+          classNames={{
+            chevron: "fill-gray-500",
+            range_start: "bg-gray-700",
+            range_end: "bg-gray-700",
+            range_middle: "bg-gray-400",
+            day_button: "border-none",
+            today: "border-2 border-gray-700",
+          }}
+          mode="range"
+          disabled={[{ before: new Date() }]}
+          selected={dateRange}
+          onSelect={(range: any) => {
+            if (range?.from && range?.to) {
+              setDateRange(range);
+              field.onChange(range.from); // Assign start date to the field
+            }
+          }}
+        />
+      </PopoverContent>
+    </Popover>
+  )}
+/>
+
               </div>
               <Button
                 type="submit"
