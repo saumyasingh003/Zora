@@ -44,7 +44,7 @@ const BoardFilters: React.FC<BoardFiltersProps> = ({ issues, onFilterChange }) =
     );
 
   useEffect(() => {
-    const filteredIssues = issues.filter(
+    const filteredIssues = issues?.filter(
       (issue) =>
         issue.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
         (selectedAssignees.length === 0 ||
