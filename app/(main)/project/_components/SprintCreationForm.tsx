@@ -66,8 +66,8 @@ export default function SprintCreationForm({
 
   return (
     <>
-      <div className="flex justify-between mx-20 pt-10">
-        <h1 className="text-5xl font-bold mb-8 gradient-title uppercase">
+      <div className="flex flex-col md:flex-row justify-between mx-5 md:mx-20 pt-6 md:pt-10">
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-8 gradient-title uppercase">
           {projectTitle}
         </h1>
         <Button
@@ -79,13 +79,13 @@ export default function SprintCreationForm({
         </Button>
       </div>
       {showForm && (
-        <Card className="pt-4 mb-4 mx-10">
+        <Card className="pt-4 mb-4 mx-4 md:mx-10">
           <CardContent>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex gap-4 items-end"
+              className="flex flex-col gap-6 md:flex-row items-start md:items-end"
             >
-              <div className="flex-1">
+              <div className="flex-1 w-full">
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium mb-1"
@@ -96,7 +96,7 @@ export default function SprintCreationForm({
                   id="name"
                   {...register("name")}
                   readOnly
-                  className="bg-gray-300"
+                  className="bg-gray-300 w-full"
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm mt-1">
@@ -104,7 +104,7 @@ export default function SprintCreationForm({
                   </p>
                 )}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 w-full">
                 <label className="block text-sm font-medium mb-1">
                   Sprint Duration
                 </label>
@@ -158,7 +158,11 @@ export default function SprintCreationForm({
                   )}
                 />
               </div>
-              <Button type="submit" disabled={createSprintLoading}>
+              <Button
+                type="submit"
+                disabled={createSprintLoading}
+                className="w-full md:w-auto"
+              >
                 {createSprintLoading ? "Creating..." : "Create Sprint"}
               </Button>
             </form>

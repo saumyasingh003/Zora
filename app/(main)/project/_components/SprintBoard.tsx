@@ -12,7 +12,6 @@ import { issue } from "@uiw/react-md-editor";
 import IssueCard from "./IssueCard";
 import { getIssuesForSprint, updateIssueOrder } from "@/actions/issue";
 import { toast } from "sonner";
-import BoardFilters from "./BoardFilters";
 
 function SprintBoard({ sprints = [], projectId, orgId }: any) {
   const [currentSprint, setCurrentSprint] = useState(
@@ -22,11 +21,14 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(null);
 
-  function reorder(list: any, startIndex: any, endIndex: any) {
+
+  
+
+  function reorder(list:any, startIndex:any, endIndex:any) {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
-
+  
     return result;
   }
 
@@ -41,9 +43,10 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
     fn: fetchIssues,
     data: issues,
     setData: setIssues,
-  }: any = useFetch(getIssuesForSprint);
+  }:any = useFetch(getIssuesForSprint);
 
   const [filteredIssues, setFilteredIssues] = useState(issues);
+
 
   console.log("issues: ", issues);
 
@@ -53,9 +56,11 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
     }
   }, [currentSprint.id]);
 
+
   const handleIssueCreated = (issue: any) => {
     fetchIssues(currentSprint.id);
   };
+
 
   const {
     fn: updateIssueOrderFn,
@@ -63,7 +68,7 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
     error: updateIssuesError,
   } = useFetch(updateIssueOrder);
 
-  const onDragEnd = async (result: any) => {
+  const onDragEnd = async (result:any) => {
     if (currentSprint.status === "PLANNED") {
       toast.warning("Start the sprint to update board");
       return;
@@ -103,7 +108,7 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
         destination.index
       );
 
-      reorderedCards.forEach((card: any, i) => {
+      reorderedCards.forEach((card:any, i) => {
         card.order = i;
       });
     } else {
@@ -126,17 +131,12 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
       });
     }
 
-    const sortedIssues: any[] = newOrderedData.sort(
-      (a, b) => a.order - b.order
-    );
+    const sortedIssues:any[] = newOrderedData.sort((a, b) => a.order - b.order);
     setIssues(newOrderedData, sortedIssues);
 
     updateIssueOrderFn(sortedIssues);
   };
 
-  const handleFilterChange = (newFilteredIssues: any) => {
-    setFilteredIssues(newFilteredIssues);
-  };
 
   return (
     <div className="">
@@ -147,14 +147,9 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
         projectId={projectId}
       />
 
-      {issues && !issuesLoading && (
-        <BoardFilters issues={issues} onFilterChange={handleFilterChange} />
-      )}
-
       {issuesLoading && (
         <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
       )}
-
       {/* Kanban board */}
 
       {/* [#D62828]
@@ -176,14 +171,13 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
                   </h3>
                   <hr />
                   {/* issues */}
-                  {filteredIssues
-                    ?.filter((issue: any) => issue.status === column.key)
-                    .map((issue: any, index: any) => (
+                  {issues?.filter((issue:any) => issue.status === column.key)
+                    .map((issue:any, index:any) => (
                       <Draggable
                         key={issue.id}
                         draggableId={issue.id}
                         index={index}
-                        isDragDisabled={updateIssuesLoading}
+                         isDragDisabled ={updateIssuesLoading}
                       >
                         {(provided) => (
                           <div
@@ -194,9 +188,9 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
                             <IssueCard
                               issue={issue}
                               onDelete={() => fetchIssues(currentSprint.id)}
-                              onUpdate={(updated: any) =>
-                                setIssues((issues: any) =>
-                                  issues.map((issue: any) => {
+                              onUpdate={(updated:any) =>
+                                setIssues((issues:any) =>
+                                  issues.map((issue:any) => {
                                     if (issue.id === updated.id) return updated;
                                     return issue;
                                   })

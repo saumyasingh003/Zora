@@ -59,29 +59,28 @@ const CreateProjectPage = () => {
 
   if (!isAdmin) {
     return (
-      <div className="flex flex-col gap-2 items-center pt-32">
-        <span className="text-2xl gradient-title">
+      <div className="flex flex-col gap-2 items-center pt-32 px-4">
+        <span className="text-2xl gradient-title text-center">
           Oops! Only Admins can create projects.
         </span>
-
         <OrgSwitcher />
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-6xl text-center font-bold mb-8 gradient-title mt-16">
+    <div className="container mx-auto py-10 px-4">
+      <h1 className="text-3xl md:text-6xl text-center font-bold mb-8 gradient-title mt-16">
         Create New Project
       </h1>
       <form
-        className="flex flex-col space-y-4 w-[70rem] bg-gray-400  p-8 mx-auto rounded-lg"
+        className="flex flex-col space-y-4 max-w-4xl bg-gray-400 p-6 md:p-8 mx-auto rounded-lg"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div>
           <Input
             id="name"
-            className="bg-red-700 py-8 text-center text-white"
+            className="bg-red-700 py-4 md:py-8 text-center text-white"
             placeholder="Project Name"
             {...register("name")}
           />
@@ -92,7 +91,7 @@ const CreateProjectPage = () => {
         <div>
           <Input
             id="key"
-            className="bg-red-700 py-8 text-center text-white uppercase"
+            className="bg-red-700 py-4 md:py-8 text-center text-white uppercase"
             placeholder="Project Key (Ex: RCYT)"
             {...register("key")}
           />
@@ -104,7 +103,7 @@ const CreateProjectPage = () => {
           <Textarea
             id="description"
             {...register("description")}
-            className="bg-red-700 py-8 h-28 text-center  text-white"
+            className="bg-red-700 py-4 md:py-8 h-20 md:h-28 text-center text-white"
             placeholder="Project Description"
           />
           {errors?.description && (
@@ -114,17 +113,14 @@ const CreateProjectPage = () => {
         {loading && (
           <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
         )}
-
         <Button
           type="submit"
           size="lg"
-       
-          className="bg-green-700 text-white w-[20em] self-center"
+          className="bg-green-700 text-white w-full md:w-[20em] self-center"
         >
           {loading ? "Creating..." : "Create Project"}
         </Button>
         {error && <p className="text-red-500 mt-2">{errors?.root?.message}</p>}
-      
       </form>
     </div>
   );

@@ -11,6 +11,7 @@ import {
 import useFetch from "@/hooks/use-fetch";
 
 import { format, formatDistanceToNow, isAfter, isBefore } from "date-fns";
+
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -37,8 +38,6 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
   };
 
   const getStatusText = () => {
-    // console.log("Status:", status);
-
     if (status === "COMPLETED") {
       return `Sprint Ended`;
     }
@@ -56,18 +55,17 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
     loading,
     error,
     data: updatedStatus,
-  }:any = useFetch(updateSprintStatus);
+  }: any = useFetch(updateSprintStatus);
 
   const handleStatusChange = async (newStatus: string) => {
     await updateStatus(sprint.id, newStatus);
     window.location.reload();
   };
 
-
   useEffect(() => {
     const sprintId = searchParams.get("sprint");
     if (sprintId && sprintId !== sprint.id) {
-      const selectedSprint = sprints.find((s:any) => s.id === sprintId);
+      const selectedSprint = sprints.find((s: any) => s.id === sprintId);
       if (selectedSprint) {
         setSprint(selectedSprint);
         setStatus(selectedSprint.status);
@@ -87,9 +85,9 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
 
   return (
     <>
-      <div className="flex justify-center items-center gap-4  ">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4 p-4">
         <Select value={sprint?.id} onValueChange={handleSprintChange}>
-          <SelectTrigger className="bg-gray-300 w-[80%] p-4">
+          <SelectTrigger className="bg-gray-300 w-full md:w-[80%] p-4">
             <SelectValue placeholder="Select Sprint" />
           </SelectTrigger>
           <SelectContent>
@@ -106,7 +104,7 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
 
         {canStart && status !== "ACTIVE" && (
           <Button
-            className="bg-green-900 text-white"
+            className="bg-green-900 text-white w-full md:w-auto"
             onClick={() => handleStatusChange("ACTIVE")}
             disabled={loading}
           >
@@ -116,7 +114,7 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
         {canEnd && status === "ACTIVE" && (
           <Button
             variant="destructive"
-            className="bg-red-600 text-white"
+            className="bg-red-600 text-white w-full md:w-auto"
             onClick={() => handleStatusChange("COMPLETED")}
             disabled={loading}
           >
@@ -127,7 +125,7 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
       {loading && <BarLoader width={"100%"} className="mt-2" color="#36d7b7" />}
       {getStatusText() && (
         <div className="mt-3">
-          <p className="bg-yellow-500 p-2 rounded-lg  w-[10%] ml-24 text-black">
+          <p className="bg-yellow-500 p-2 rounded-lg w-full md:w-[20%] text-center mx-auto text-black">
             {getStatusText()}
           </p>
         </div>
