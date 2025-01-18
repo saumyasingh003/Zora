@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/checkUse.js", "lib/prisma.js", "lib/checkUser.js", "hooks/use-fetch.js", "actions/project.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/checkUse.js", "lib/prisma.js", "lib/checkUser.js", "hooks/use-fetch.ts", "actions/project.ts"],
   "exclude": ["node_modules"]
 }

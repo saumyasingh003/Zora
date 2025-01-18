@@ -15,6 +15,16 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { BarLoader } from "react-spinners";
 
+interface Project {
+  id: string;
+  name: string;
+  key: string;
+  description: string;
+  organizationId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 const CreateProjectPage = () => {
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
   const { isLoaded: isUserLoaded } = useUser();
@@ -40,8 +50,9 @@ const CreateProjectPage = () => {
     error,
     data: project,
     fn: createProjectFn,
-  } = useFetch(createProject);
+  } = useFetch<Project>(createProject);
 
+  console.log("Project", project)
   const onSubmit = async (data: any) => {
     createProjectFn(data);
   };
@@ -49,7 +60,7 @@ const CreateProjectPage = () => {
   useEffect(() => {
     if (project) {
       toast.success("Project created successfully !!");
-      router.push(`/project/${project.id}`);
+      router.push(`/project/${project?.id}`);
     }
   }, [loading]);
 
