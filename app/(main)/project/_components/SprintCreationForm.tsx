@@ -25,9 +25,9 @@ import { toast } from "sonner";
 
 export default function SprintCreationForm({
   projectTitle,
-  projectKey,
+  // projectKey,
   projectId,
-  sprintKey,
+  // sprintKey,
 }: any) {
   const [showForm, setShowForm] = useState(false);
   const [dateRange, setDateRange] = useState({
