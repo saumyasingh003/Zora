@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { BarLoader } from "react-spinners";
+
 
 export default async function ProjectLayout({ children }:any) {
   return (

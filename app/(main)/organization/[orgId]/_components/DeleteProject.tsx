@@ -8,13 +8,12 @@ import { deleteProject } from "@/actions/project";
 import { useRouter } from "next/navigation";
 import useFetch from "@/hooks/use-fetch";
 
-export default function DeleteProject({ projectId }: any) {
+export default function DeleteProject({ projectId }:any) {
   const { membership } = useOrganization();
   const router = useRouter();
 
   const {
     loading: isDeleting,
-    error,
     fn: deleteProjectFn,
     data: deleted,
   } = useFetch(deleteProject);

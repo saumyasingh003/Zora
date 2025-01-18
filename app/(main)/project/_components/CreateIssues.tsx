@@ -38,7 +38,7 @@ export default function IssueCreationDrawer({
   const {
     loading: createIssueLoading,
     fn: createIssueFn,
-    error: createIssueError,
+    // error: createIssueError,
     data: newIssue,
   } = useFetch(createIssue);
 

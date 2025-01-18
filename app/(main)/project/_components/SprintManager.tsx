@@ -13,13 +13,13 @@ import useFetch from "@/hooks/use-fetch";
 import { format, formatDistanceToNow, isAfter, isBefore } from "date-fns";
 
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
 
-const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
+const SprintManager = ({ sprint, setSprint, sprints }: any) => {
   const [status, setStatus] = useState(sprint?.status);
-  const router = useRouter();
+  // const router = useRouter();
   const searchParams = useSearchParams();
 
   const startDate = new Date(sprint?.startDate);
@@ -53,7 +53,6 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }: any) => {
   const {
     fn: updateStatus,
     loading,
-    error,
     data: updatedStatus,
   }: any = useFetch(updateSprintStatus);
 

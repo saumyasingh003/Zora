@@ -8,7 +8,7 @@ import { Plus } from "lucide-react";
 import IssueCreationDrawer from "./CreateIssues";
 import useFetch from "@/hooks/use-fetch";
 import { BarLoader } from "react-spinners";
-import { issue } from "@uiw/react-md-editor";
+// import { issue } from "@uiw/react-md-editor";
 import IssueCard from "./IssueCard";
 import { getIssuesForSprint, updateIssueOrder } from "@/actions/issue";
 import { toast } from "sonner";
@@ -39,13 +39,13 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
 
   const {
     loading: issuesLoading,
-    error: issuesError,
+    // error: issuesError,
     fn: fetchIssues,
     data: issues,
     setData: setIssues,
   }:any = useFetch(getIssuesForSprint);
 
-  const [filteredIssues, setFilteredIssues] = useState(issues);
+  // const [filteredIssues, setFilteredIssues] = useState(issues);
 
 
   console.log("issues: ", issues);
@@ -57,7 +57,7 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
   }, [currentSprint.id]);
 
 
-  const handleIssueCreated = (issue: any) => {
+  const handleIssueCreated = () => {
     fetchIssues(currentSprint.id);
   };
 
@@ -65,7 +65,7 @@ function SprintBoard({ sprints = [], projectId, orgId }: any) {
   const {
     fn: updateIssueOrderFn,
     loading: updateIssuesLoading,
-    error: updateIssuesError,
+    // error: updateIssuesError,
   } = useFetch(updateIssueOrder);
 
   const onDragEnd = async (result:any) => {

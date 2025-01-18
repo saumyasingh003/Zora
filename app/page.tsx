@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import CompanyCarousel from "@/components/ui/CompanyCarousel";
 import { ArrowRight, BarChart, Calendar, ChevronRight, Layout } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import faqs from "@/data/faqs.json";
