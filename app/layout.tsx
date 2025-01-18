@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/ui/Navbar";
 import { Toaster } from "sonner";
 
+
 // [#D62828]
 // [#F77F00]
 // [#FCBF49]
@@ -20,6 +21,9 @@ const kanit = Kanit({
 export const metadata: Metadata = {
   title: "Zora",
   description: "Project Management App",
+  icons:{
+    icon:'/assets/logo.png',
+  }
 };
 
 export default function RootLayout({
