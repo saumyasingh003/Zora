@@ -44,11 +44,11 @@ export default function RootLayout({
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Toaster richColors/>
-          <footer className="bg-[#D62828]">
+          {/* <footer className="bg-[#D62828]">
             <div className="container mx-auto py-4 text-center text-gray-200">
               <p>Made with ❤️, by Saumya Singh ✨</p>
             </div>
-          </footer>
+          </footer> */}
         </body>
       </html>
     </ClerkProvider>
